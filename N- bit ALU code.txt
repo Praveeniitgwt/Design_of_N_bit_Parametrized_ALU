@@ -1,0 +1,26 @@
+‘ t i m e s c a l e 1 ns / 1 ps
+//////////////////////////////////////////////
+module ALU#(parameter N=16)(a , b , c , opcode , c a r r y o u t ) ;
+i n pu t [N−1:0] a , b ;
+output r eg [N−1:0] c ;
+i n pu t [ 3 : 0 ] opcode ;
+output c a r r y o u t ;
+wi r e [N: 0 ] tmp = {1 ’ b0 , a} + {1 ’ b0 , b } ;
+a s s i g n c a r r y o u t = tmp [N ] ;
+always @( ∗ )
+b egi n
+ca s e ( opcode )
+4 ’ h0 : c = a + b ;
+4 ’ h1 : c = a − b ;
+4 ’ h2 : c = a >> b ;
+4 ’ h3 : c = a << b ;
+4 ’ h4 : c = a >>> b ;
+4 ’ h5 : c = a <<< b ;
+4 ’ h6 : c = ˜a ;
+4 ’ h7 : c = a & b ;
+4 ’ h8 : c = a | b ;
+4 ’ h9 : c = a ˆ b ;
+d ef a u l t : c = 0 ;
+endca se
+end
+endmodule
